@@ -382,7 +382,7 @@ class BezierChartState extends State<BezierChart>
         return _xAxisDataPoints.length * (horizontalSpacing * _currentScale) -
             horizontalPadding / 2;
       } else if (scale == BezierChartScale.MONTHLY) {
-        horizontalSpacing = constraints.maxWidth / 12;
+        horizontalSpacing = constraints.maxWidth / 8;
         return _xAxisDataPoints.length * (horizontalSpacing * _currentScale) -
             horizontalPadding / 2;
       } else if (scale == BezierChartScale.YEARLY) {
@@ -805,7 +805,10 @@ class BezierChartState extends State<BezierChart>
                   !_displayIndicator
               ? (details) => _onPinchZoom(_previousScale * details.scale)
               : null,
-          onTap: isPinchZoomActive ? null : _onHideIndicator,
+          // onTap: isPinchZoomActive ? null : _onHideIndicator,
+          onTapUp: (_) {
+            _onDisplayIndicator(_);
+          },
           child: LayoutBuilder(
             builder: (context, constraints) {
               _contentWidth = _buildContentWidth(constraints);

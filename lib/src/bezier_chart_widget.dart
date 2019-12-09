@@ -423,8 +423,9 @@ class BezierChartState extends State<BezierChart>
             (dp.xAxis as DateTime).year == widget.selectedDate.year &&
             (dp.xAxis as DateTime).month == widget.selectedDate.month);
       } else if (_currentBezierChartScale == BezierChartScale.YEARLY) {
-        index = _xAxisDataPoints.indexWhere(
-            (dp) => (dp.xAxis as DateTime).year == widget.selectedDate.year);
+        index = _xAxisDataPoints.indexWhere((dp) =>
+            (dp.xAxis as DateTime).year == widget.selectedDate.year &&
+            (dp.xAxis as DateTime).month == widget.selectedDate.month);
       } else if (_currentBezierChartScale == BezierChartScale.CUSTOM) {
         index = _xAxisDataPoints
             .indexWhere((dp) => (dp.xAxis as double) == widget.selectedValue);
@@ -538,12 +539,13 @@ class BezierChartState extends State<BezierChart>
           valueMap = tmpMap.map((k, v) => MapEntry(k, v.length.toDouble()));
         } else if (widget.bezierChartAggregation ==
             BezierChartAggregation.MAX) {
-          valueMap = tmpMap.map((k, v) => MapEntry(k, v.reduce((c1, c2) => c1 > c2 ? c1 : c2)));
+          valueMap = tmpMap.map(
+              (k, v) => MapEntry(k, v.reduce((c1, c2) => c1 > c2 ? c1 : c2)));
         } else if (widget.bezierChartAggregation ==
             BezierChartAggregation.MIN) {
-          valueMap = tmpMap.map((k, v) => MapEntry(k, v.reduce((c1, c2) => c1 < c2 ? c1 : c2)));
+          valueMap = tmpMap.map(
+              (k, v) => MapEntry(k, v.reduce((c1, c2) => c1 < c2 ? c1 : c2)));
         }
-
 
         List<DataPoint<DateTime>> newDataPoints = [];
         valueMap.keys.forEach(
